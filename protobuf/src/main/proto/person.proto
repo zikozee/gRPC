@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "common/address.proto";
+import "common/car.proto";
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.zikozee.models"; // package under which java files will be generated
+
+
+ message Person {
+   //Recommendations
+   //USE 1-25 (frequently used)-  1 byte
+   //use 16 - 2047 - 2 bytes   (sparsely used)
+   string name = 1;
+   google.protobuf.Int32Value age = 2;
+   common.Address address = 3;
+   repeated common.Car car = 4;
+ }
+
+

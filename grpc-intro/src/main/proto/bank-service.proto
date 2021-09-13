@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.zikozee.model";
+
+message BalanceCheckRequest{
+  int32 account_number = 1;
+}
+
+
+// USD
+message Balance{
+  int32 amount = 1;
+}
+
+
+message WithdrawRequest{
+  int32 account_number = 1;
+  int32 amount = 2;
+}
+
+message Money {
+  int32 value = 1;
+}
+
+service BankService{
+
+  // unary
+                  // param                    // response
+  rpc getBalance(BalanceCheckRequest)  returns (Balance);
+  rpc withdraw(WithdrawRequest)  returns (stream Money);
+}
