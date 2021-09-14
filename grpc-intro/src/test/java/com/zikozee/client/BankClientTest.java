@@ -1,12 +1,10 @@
 package com.zikozee.client;
 
 import com.google.common.util.concurrent.Uninterruptibles;
-import com.zikozee.model.Balance;
-import com.zikozee.model.BalanceCheckRequest;
-import com.zikozee.model.BankServiceGrpc;
-import com.zikozee.model.WithdrawRequest;
+import com.zikozee.model.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -59,5 +57,19 @@ class BankClientTest {
 
         latch.await();
 //        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+    }
+
+
+    @Test
+    void cashStreamingRequest() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+        StreamObserver<DepositRequest> streamObserver = this.bankServiceStub.cashDeposit(new BalanceStreamObserver(latch));
+        for (int i = 0; i < 10; i++) {
+            DepositRequest depositRequest = DepositRequest.newBuilder().setAccountNumber(8).setAmount(10).build();
+            System.out.println("adding " + depositRequest.getAmount() + " to current balance");
+            streamObserver.onNext(depositRequest);
+        }
+        streamObserver.onCompleted();
+        latch.await();
     }
 }
