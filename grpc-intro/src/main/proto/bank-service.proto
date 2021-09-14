@@ -33,12 +33,12 @@ service BankService{
 
   // unary
                   // param                    // response
-  rpc getBalance(BalanceCheckRequest)  returns (Balance);
+  rpc getBalance(BalanceCheckRequest)  returns (Balance); //GET  This will be called from the Rest controller
 
   // server-side streaming
-  rpc withdraw(WithdrawRequest)  returns (stream Money);
+  rpc withdraw(WithdrawRequest)  returns (stream Money);  //POST
 
   // client-side streaming
-  rpc cashDeposit(stream DepositRequest) returns (Balance);
+  rpc cashDeposit(stream DepositRequest) returns (Balance); //POST
 
 }
