@@ -1,7 +1,8 @@
-package com.zikozee.server;
+package com.zikozee.server.loadbalancing;
 
 import com.zikozee.model.Balance;
 import com.zikozee.model.DepositRequest;
+import com.zikozee.server.rpctypes.AccountDatabase;
 import io.grpc.stub.StreamObserver;
 
 /**
@@ -21,6 +22,7 @@ public class CashStreamingRequest implements StreamObserver<DepositRequest> {
     @Override
     public void onNext(DepositRequest depositRequest) {
         int accountNumber = depositRequest.getAccountNumber();
+        System.out.println("Received cash deposit for: " + accountNumber);
         int amount = depositRequest.getAmount();
         accountBalance = AccountDatabase.addbalance(accountNumber, amount); // keeps adding on every onNext call
     }

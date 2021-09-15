@@ -1,4 +1,4 @@
-package com.zikozee.server;
+package com.zikozee.server.rpctypes;
 
 import java.util.Map;
 import java.util.function.Function;

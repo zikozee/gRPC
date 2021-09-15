@@ -1,4 +1,4 @@
-package com.zikozee.server;
+package com.zikozee.server.loadbalancing;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -10,13 +10,12 @@ import java.io.IOException;
  * @created : 13 Sep, 2021
  */
 
-public class GrpcServer {
+public class GrpcServer1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
         Server server = ServerBuilder.forPort(6565)
                 .addService(new BankService())
-                .addService(new TransferService())
                 .build();
 
         server.start();

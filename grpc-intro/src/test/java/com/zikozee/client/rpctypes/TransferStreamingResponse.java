@@ -1,4 +1,4 @@
-package com.zikozee.client;
+package com.zikozee.client.rpctypes;
 
 import com.zikozee.model.TransferResponse;
 import io.grpc.stub.StreamObserver;

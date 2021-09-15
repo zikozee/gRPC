@@ -1,4 +1,4 @@
-package com.zikozee.server;
+package com.zikozee.server.rpctypes;
 
 import com.zikozee.model.Account;
 import com.zikozee.model.TransferRequest;

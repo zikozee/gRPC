@@ -1,6 +1,5 @@
-package com.zikozee.client;
+package com.zikozee.client.rpctypes;
 
-import com.zikozee.model.BankServiceGrpc;
 import com.zikozee.model.TransferRequest;
 import com.zikozee.model.TransferServiceGrpc;
 import io.grpc.ManagedChannel;

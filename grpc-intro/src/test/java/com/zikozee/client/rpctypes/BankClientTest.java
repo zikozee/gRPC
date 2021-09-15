@@ -1,6 +1,5 @@
-package com.zikozee.client;
+package com.zikozee.client.rpctypes;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.zikozee.model.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

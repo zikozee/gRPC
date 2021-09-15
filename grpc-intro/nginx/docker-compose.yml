@@ -1,0 +1,8 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:1.19.3
+    volumes:
+      - c:/Users/zikoz/Desktop/gPRC/grpc-intro/nginx/conf:/etc/nginx/conf.d
+    ports:
+      - "8585:8585"
