@@ -13,7 +13,7 @@ import io.grpc.stub.StreamObserver;
 
 public class TransferStreamingRequest implements StreamObserver<TransferRequest> {
 
-    private StreamObserver<TransferResponse> transferResponseStreamObserver;
+    private final StreamObserver<TransferResponse> transferResponseStreamObserver;
 
     public TransferStreamingRequest(StreamObserver<TransferResponse> transferResponseStreamObserver) {
         this.transferResponseStreamObserver = transferResponseStreamObserver;
