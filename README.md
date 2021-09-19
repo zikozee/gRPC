@@ -17,3 +17,11 @@ Streaming
 Single
  - More efficient than streaming RPC
  - Size is small
+
+
+            KEY VALUE PAIRS:
+            ===============
+Sending info from client to interceptor: CallOptions
+Sending info from client to Server: Metadata
+Sending info from interceptor(on server) to Server service: Context
+
