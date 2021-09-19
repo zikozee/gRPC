@@ -26,8 +26,6 @@ public class MetadataService extends BankServiceGrpc.BankServiceImplBase{
                 .setAmount(AccountDatabase.getBalance(accountNumber))
                 .build();
 
-        //simulate time-consuming call
-        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
         responseObserver.onNext(balance);
         responseObserver.onCompleted();
     }
