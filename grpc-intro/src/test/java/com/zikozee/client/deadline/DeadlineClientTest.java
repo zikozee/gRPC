@@ -29,6 +29,7 @@ class DeadlineClientTest {
     @BeforeAll
     public void setUp(){
         ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565)
+                .intercept(new DeadlineInterceptor()) // todo info :: setting deadline GLOBALLY  like AOP
                 .usePlaintext()
                 .build();
 
@@ -44,7 +45,7 @@ class DeadlineClientTest {
                 .build();
         try{
             Balance balance = this.blockingStub
-                    .withDeadline(Deadline.after(2, TimeUnit.SECONDS)) // todo info :: setting deadline
+//                    .withDeadline(Deadline.after(2, TimeUnit.SECONDS)) // todo info :: setting deadline
                     .getBalance(balanceCheckRequest);
             System.out.println("Received: "+ balance.getAmount());
         }catch (StatusRuntimeException e){
@@ -59,8 +60,7 @@ class DeadlineClientTest {
                 .setAmount(50).build();
        try{
            this.blockingStub
-                   .withDeadline(Deadline.after(4, TimeUnit.SECONDS))
-//                .withDeadlineAfter(4, TimeUnit.SECONDS)
+                   .withDeadline(Deadline.after(2, TimeUnit.SECONDS)) //Overriding global deadline
                    .withdraw(withdrawRequest)
                    .forEachRemaining(money -> System.out.println("Received: " + money.getValue()));
        }catch (StatusRuntimeException e){
