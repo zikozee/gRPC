@@ -1,8 +1,13 @@
 package com.zikozee.client.rpctypes;
 
+import com.zikozee.client.metadata.ClientConstants;
 import com.zikozee.model.Money;
+import com.zikozee.model.WithdrawalError;
+import io.grpc.Metadata;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -25,7 +30,11 @@ public class MoneyStreamingResponse implements StreamObserver<Money> {
 
     @Override
     public void onError(Throwable throwable) {
-        System.out.println(throwable.getLocalizedMessage());
+
+        Metadata metadata = Status.trailersFromThrowable(throwable);
+        WithdrawalError withdrawalError = metadata.get(ClientConstants.WITHDRAWAL_ERROR_KEY);
+
+        System.out.println(withdrawalError.getAmount() + " : " + withdrawalError.getErrorMessage());
         latch.countDown();
     }
 
