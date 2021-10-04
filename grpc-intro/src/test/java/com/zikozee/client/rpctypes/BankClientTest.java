@@ -3,11 +3,17 @@ package com.zikozee.client.rpctypes;
 import com.zikozee.model.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
+import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
+import io.grpc.netty.shaded.io.netty.handler.ssl.SslContext;
 import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import javax.net.ssl.SSLException;
+import java.awt.*;
+import java.io.File;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -22,9 +28,15 @@ class BankClientTest {
     private BankServiceGrpc.BankServiceStub bankServiceStub;
 
     @BeforeAll
-    public void setUp(){
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565)
-                .usePlaintext()
+    public void setUp() throws SSLException {
+
+        SslContext sslContext = GrpcSslContexts.forClient()
+                .trustManager(new File("C:/Users/zikoz/Desktop/gPRC/ssl_tls/ca.cert.pem"))
+                .build();
+
+        ManagedChannel managedChannel = NettyChannelBuilder.forAddress("localhost", 6565)
+                .sslContext(sslContext)
+//                .usePlaintext()
                 .build();
 
         this.blockingStub = BankServiceGrpc.newBlockingStub(managedChannel);
