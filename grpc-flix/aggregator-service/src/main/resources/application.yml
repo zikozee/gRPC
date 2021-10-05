@@ -5,4 +5,10 @@ grpc:
       negotiationType: plaintext
     movie-service:
       address: static://localhost:7575
-      negotiationType: plaintext
+      negotiationType: TLS
+      security:
+        trustCertCollection: file:C:/Users/zikoz/Desktop/gPRC/ssl_tls/ca.cert.pem
+
+
+#Using ssl for movie-service
+

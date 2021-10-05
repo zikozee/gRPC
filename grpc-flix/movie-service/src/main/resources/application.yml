@@ -1,3 +1,10 @@
 grpc:
   server:
     port: 7575
+
+    security:
+      enabled: true
+      certificate-chain: file:C:/Users/zikoz/Desktop/gPRC/ssl_tls/localhost.crt
+      private-key: file:C:/Users/zikoz/Desktop/gPRC/ssl_tls/localhost.pem
+
+      ## USING SSL FOR MOVIE SERVICE: REMEMBER TO UPDATE CLIENT(aggregator with ssl)
